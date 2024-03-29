@@ -1,43 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Vertical List</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
         /* 样式可以根据需要自行修改 */
         .list-item {
-            padding: 0 10px;
+            padding: 10px 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 10px;
             border-radius: 10px;
-            border: 1px solid rgba(0,0,0,0.3);
+            border: 1px solid rgba(0, 0, 0, 0.3);
         }
 
-        .icon {
-            width: 50px;
-            height: 50px;
-            background-color: #ccc;
-            margin-right: 10px;
+        .date {
+            width: 70px;
+            height: 70px;
+            background-color: #ffecec;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px; /* 调整日期字体大小 */
+            color: rgb(199, 144, 144);
         }
-
-        img {
-            width: 50px;
+        .date span:first-child {
+          font-size: 20px;
         }
-
+        .date span:last-child {
+          font-size: 14px;
+        }
         .content {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #333333;
+        }
+        .message {
+          margin-top: 15px;
+          color: #999999;
+          font-size: 13px;
         }
     </style>
 </head>
+
 <body>
     <script>
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0'); // 获取今天的日期，确保两位数展示
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // 获取今天的月份，确保两位数展示
+        const year = today.getFullYear(); // 获取今年
+
         const data = [
-            { title: 'Title 1', message: 'Message 1', imageUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain' },
-            { title: 'Title 2', message: 'Message 2', imageUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain' },
-            { title: 'Title 3', message: 'Message 3', imageUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain' }
+            { title: '《任职公示》', message: '党委组织部' },
+            { title: '《关于中国工程院院士候选人公示》', message: '人事处' },
+            { title: '《考察对象公示》', message: '党委组织部' }
         ];
 
         const generateListHTML = (data) => {
@@ -45,12 +72,13 @@
                 <div class="list" id="list-container">
                     ${data.map(item => `
                         <div class="list-item">
-                            <div class="icon">
-                                <img src="${item.imageUrl}">
+                            <div class="date">
+                                <span>${day}</span>
+                                <span>${year}-${month}</span>
                             </div>
                             <div class="content">
                                 <h3>${item.title}</h3>
-                                <p>${item.message}</p>
+                                <p class="message">${item.message}</p>
                             </div>
                         </div>
                     `).join('')}
@@ -61,4 +89,5 @@
         document.body.innerHTML = generateListHTML(data);
     </script>
 </body>
+
 </html>
