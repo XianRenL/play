@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vertical List</title>
+    <title>Dynamic Vertical List</title>
     <style>
         /* 样式可以根据需要自行修改 */
         .list-item {
-          padding: 0 10px;
+            padding: 0 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -22,43 +22,43 @@
             background-color: #ccc;
             margin-right: 10px;
         }
+
         img {
-          width: 50px;
+            width: 50px;
         }
+
         .content {
-          flex: 1;
+            flex: 1;
         }
     </style>
 </head>
 <body>
-    <div class="list">
-        <div class="list-item">
-            <div class="icon">
-              <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain">
-            </div>
-            <div class="content">
-                <h3>Title 1</h3>
-                <p>Message 1</p>
-            </div>
-        </div>
-        <div class="list-item">
-            <div class="icon">
-              <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain">
-            </div>
-            <div class="content">
-                <h3>Title 2</h3>
-                <p>Message 2</p>
-            </div>
-        </div>
-        <div class="list-item">
-            <div class="icon">
-              <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain">
-            </div>
-            <div class="content">
-                <h3>Title 3</h3>
-                <p>Message 3</p>
-            </div>
-        </div>
-    </div>
+    <script>
+        const data = [
+            { title: 'Title 1', message: 'Message 1', imageUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain' },
+            { title: 'Title 2', message: 'Message 2', imageUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain' },
+            { title: 'Title 3', message: 'Message 3', imageUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.h8IWA5clMlpMsE_fkpYc1gHaHa?rs=1&pid=ImgDetMain' }
+        ];
+
+        const generateListHTML = (data) => {
+            return `
+                <div class="list" id="list-container">
+                    ${data.map(item => `
+                        <div class="list-item">
+                            <div class="icon">
+                                <img src="${item.imageUrl}">
+                            </div>
+                            <div class="content">
+                                <h3>${item.title}</h3>
+                                <p>${item.message}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        };
+
+        document.body.innerHTML = generateListHTML(data);
+    </script>
 </body>
 </html>
